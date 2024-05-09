@@ -19,7 +19,7 @@ public class UserDaoJDBCImpl implements UserDao {
     public void createUsersTable() throws SQLException {
         Util s = new Util();
         try (Statement statement = s.getConnection().createStatement()) {
-            String SQL = "CREATE TABLE maven.Users " +
+            String SQL = "CREATE TABLE IF NOT EXISTS maven.Users " +
                     "(id INTEGER not NULL AUTO_INCREMENT, " +
                     " name VARCHAR(45), " +
                     " lastName VARCHAR (45), " +
@@ -32,7 +32,7 @@ public class UserDaoJDBCImpl implements UserDao {
     public void dropUsersTable() {
         Util s = new Util();
         try (Statement statement = s.getConnection().createStatement()) {
-            String SQL = "DROP TABLE maven.Users";
+            String SQL = "DROP TABLE IF EXISTS maven.Users";
             statement.executeUpdate(SQL);
         } catch (SQLException e) {
             e.getStackTrace();
